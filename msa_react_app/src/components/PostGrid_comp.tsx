@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostCard from "../components/PostCard_comp";
+import AddPost from "../components/AddPost";
 import { Grid } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
@@ -9,6 +10,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       overflow: "hidden",
       padding: theme.spacing(3, 3),
+    },
+    add: {
+      textAlign: "center",
     },
   })
 );
@@ -37,7 +41,11 @@ function PostGrid() {
         <div className={classes.root}>
           <Grid container spacing={3}>
             <Grid key={"card_" + i} item xs={12}>
-              <PostCard Alias={el["alias"]} Content={el["content"]} />
+              <PostCard
+                Alias={el["alias"]}
+                Content={el["content"]}
+                ID={el["id"]}
+              />
             </Grid>
           </Grid>
         </div>
@@ -47,9 +55,15 @@ function PostGrid() {
     }
   });
 
+  // const [NewPostUP, setNewPost] = useState<string | null>("Default value");
+  const Post = "Default value";
+
   return (
-    <div>
+    <div className={classes.root}>
       <Grid>{Cards}</Grid>
+      <div className={classes.add}>
+        <AddPost></AddPost>
+      </div>
     </div>
   );
 }
