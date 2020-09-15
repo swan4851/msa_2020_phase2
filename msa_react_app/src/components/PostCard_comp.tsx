@@ -16,13 +16,13 @@ import Divider from "@material-ui/core/Divider";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
       border: "1px solid #000",
-      //maxWidth: 345,
     },
     media: {
       height: 140,
@@ -30,7 +30,11 @@ const useStyles = makeStyles((theme: Theme) =>
     details: {
       display: "flex",
       flexDirection: "column",
+      component: "div",
+      my: 2,
+      textOverflow: "ellipsis",
       overflow: "hidden",
+      bgcolor: "background.paper",
     },
     modal: {
       display: "flex",
@@ -49,6 +53,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     date: {
       paddingLeft: theme.spacing(2),
+    },
+    divider: {
+      paddingBottom: theme.spacing(2),
     },
   })
 );
@@ -152,22 +159,33 @@ function PostCard(props: IMediaCardProps) {
             //   image="/static/images/cards/contemplative-reptile.jpg"
             //   title="Contemplative Reptile"
           /> */}
-          <CardContent className={classes.media}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {props.Alias}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {props.Content}
-            </Typography>
-          </CardContent>
+          <div className={classes.divider}>
+            <CardContent className={classes.media}>
+              <Typography gutterBottom variant="h5" component="h2">
+                {props.Alias}
+              </Typography>
+
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                paragraph
+              >
+                {props.Content}
+              </Typography>
+            </CardContent>
+          </div>
         </CardActionArea>
-        <Divider variant="middle" />
-        <div className={classes.date}>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {"Date Posted:  " + props.Date?.split("T")[0]}
-          </Typography>
-        </div>
       </div>
+
+      <Divider variant="middle" />
+
+      <div className={classes.date}>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {"Date Posted:  " + props.Date?.split("T")[0]}
+        </Typography>
+      </div>
+
       <CardActions>
         <IconButton aria-label="likes" onClick={handlelike}>
           <ThumbUpAltIcon />

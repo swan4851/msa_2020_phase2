@@ -6,6 +6,7 @@ import PostGrid from "./components/PostGrid_comp";
 import AddPost from "./components/AddPost";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import LanguageMenu from "./components/LanguageMenu_comp";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +20,7 @@ function App() {
   const classes = useStyles();
   return (
     <div>
+      {/* <LanguageMenu></LanguageMenu> */}
       <div className={classes.add}>
         <Typography
           color="textSecondary"

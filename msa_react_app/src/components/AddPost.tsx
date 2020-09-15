@@ -116,8 +116,8 @@ export default function AddPost() {
 
   return (
     <div>
-      <Fab color="primary" aria-label="add">
-        <AddIcon onClick={handleClickOpen} />
+      <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
+        <AddIcon />
       </Fab>
 
       <Dialog
