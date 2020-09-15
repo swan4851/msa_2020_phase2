@@ -53,6 +53,7 @@ export default function AddPost() {
 
   const handleClose = () => {
     setOpen(false);
+    setNewPost("");
   };
 
   const [NewPostUP, setNewPost] = useState<string | null>("");
@@ -67,7 +68,7 @@ export default function AddPost() {
   const handleSubmit = () => {
     if (NewPostUP?.length !== 0 && NewPostUP !== null && NewPostUP !== "") {
       console.log(NewPostUP);
-      handleClose();
+
       var postDate = new Date();
       console.log(new Date().toLocaleString());
       fetch("https://dankblog.azurewebsites.net/api/Posts", {
@@ -78,7 +79,7 @@ export default function AddPost() {
           id: 0,
           content: NewPostUP,
           alias: "sw",
-          datePosted: "2020-09-14T00:00:00",
+          datePosted: postDate.toISOString(),
           likes: 0,
           dislikes: 0,
         }),
@@ -87,7 +88,8 @@ export default function AddPost() {
         return response.json();
       });
 
-      window.location.reload(false);
+      handleClose();
+      // window.location.reload(false);
 
       // props.NewPost = NewPostUP;
     } else {
@@ -132,7 +134,7 @@ export default function AddPost() {
             fullWidth
             rows={10}
             variant="outlined"
-            onClick={() => setHasFocus(true)}
+            //onClick={() => setHasFocus(true)}
             value={NewPostUP}
             onChange={(e) => handleNewPost(e.target.value)}
           />

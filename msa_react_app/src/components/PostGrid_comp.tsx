@@ -45,6 +45,7 @@ function PostGrid() {
                 Alias={el["alias"]}
                 Content={el["content"]}
                 ID={el["id"]}
+                Date={el["datePosted"]}
               />
             </Grid>
           </Grid>
@@ -60,12 +61,16 @@ function PostGrid() {
 
   return (
     <div className={classes.root}>
-      <Grid>{Cards}</Grid>
+      <Grid>{Cards.reverse()}</Grid>
       <div className={classes.add}>
         <AddPost></AddPost>
       </div>
     </div>
   );
+
+  // function refresh() => {
+  //   // nblablblaba
+  // }
 }
 
 export default PostGrid;

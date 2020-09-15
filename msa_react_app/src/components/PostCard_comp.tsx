@@ -11,6 +11,8 @@ import Grid from "@material-ui/core/Grid";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import AddPost from "../components/AddPost";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
       overflow: "auto",
       width: "100%",
     },
+    date: {
+      paddingLeft: theme.spacing(2),
+    },
   })
 );
 
@@ -49,6 +54,7 @@ interface IMediaCardProps {
   Alias: string | undefined;
   Content: string | undefined;
   ID: Number | undefined;
+  Date: string | undefined;
 }
 
 function PostCard(props: IMediaCardProps) {
@@ -75,7 +81,18 @@ function PostCard(props: IMediaCardProps) {
       console.log(response);
       return response.json();
     });
+
+    // window.location.reload(false);
   };
+
+  // function handleEdit() {
+  //   console.log("Edit pressed");
+  //   return <AddPost></AddPost>;
+  // }
+
+  // const handleEdit = () => {
+  //   <AddPost handleAddOpen={handleClickOpen}></AddPost> // do stuff
+  // }
 
   return (
     <Card className={classes.root}>
@@ -95,12 +112,18 @@ function PostCard(props: IMediaCardProps) {
             </Typography>
           </CardContent>
         </CardActionArea>
+        <Divider variant="middle" />
+        <div className={classes.date}>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.Date?.split("T")[0]}
+          </Typography>
+        </div>
       </div>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          Edit
         </Button>
-        <Button size="small" color="primary" onClick={handleDelete}>
+        <Button size="small" color="secondary" onClick={handleDelete}>
           Delete
         </Button>
       </CardActions>
@@ -128,3 +151,34 @@ function PostCard(props: IMediaCardProps) {
 }
 
 export default PostCard;
+
+// function Component1(){
+
+//   const [count, setCount] = React.useState(0);
+
+//   const handleClose = () => {
+//     setCount(count + 1);
+//   };
+
+//   return (count);
+
+// }
+// export default Component1;
+
+// //======================================
+
+// import Component1
+// function Component2(){
+
+//   const handleClick = () => {
+//     <Component1 ></Component1>
+//   };
+
+//   return(
+//     <Button onClick={handleClick}>
+//       save
+//     </Button>
+//   );
+
+// }
+// export default Component2;
