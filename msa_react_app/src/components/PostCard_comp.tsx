@@ -13,6 +13,9 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import AddPost from "../components/AddPost";
 import Divider from "@material-ui/core/Divider";
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import ThumbDownIcon from "@material-ui/icons/ThumbDown";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,8 +56,10 @@ const useStyles = makeStyles((theme: Theme) =>
 interface IMediaCardProps {
   Alias: string | undefined;
   Content: string | undefined;
-  ID: Number | undefined;
+  ID: number | any;
   Date: string | undefined;
+  Likes: number | any;
+  Dislikes: number | any;
 }
 
 function PostCard(props: IMediaCardProps) {
@@ -83,6 +88,48 @@ function PostCard(props: IMediaCardProps) {
     });
 
     // window.location.reload(false);
+  };
+
+  const handlelike = () => {
+    console.log(props.Likes + 1);
+
+    fetch("https://dankblog.azurewebsites.net/api/Posts/" + props.ID, {
+      method: "PUT",
+      // We convert the React state to JSON and send it as the POST body
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: props.ID,
+        content: props.Content,
+        alias: props.Alias,
+        datePosted: props.Date,
+        likes: props.Likes + 1,
+        dislikes: props.Dislikes,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+      .catch((err) => console.log(err)); // Do something with the error
+  };
+
+  const handleDislike = () => {
+    console.log(props.Dislikes);
+
+    fetch("https://dankblog.azurewebsites.net/api/Posts/" + props.ID, {
+      method: "PUT",
+      // We convert the React state to JSON and send it as the POST body
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: props.ID,
+        content: props.Content,
+        alias: props.Alias,
+        datePosted: props.Date,
+        likes: props.Likes,
+        dislikes: props.Dislikes + 1,
+      }),
+    }).then(function (response) {
+      console.log(response);
+      return response.json();
+    });
   };
 
   // function handleEdit() {
@@ -115,14 +162,23 @@ function PostCard(props: IMediaCardProps) {
         <Divider variant="middle" />
         <div className={classes.date}>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.Date?.split("T")[0]}
+            {"Date Posted:  " + props.Date?.split("T")[0]}
           </Typography>
         </div>
       </div>
       <CardActions>
-        <Button size="small" color="primary">
-          Edit
-        </Button>
+        <IconButton aria-label="likes" onClick={handlelike}>
+          <ThumbUpAltIcon />
+        </IconButton>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {props.Likes}
+        </Typography>
+        <IconButton aria-label="dislikes" onClick={handleDislike}>
+          <ThumbDownIcon />
+        </IconButton>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {props.Dislikes}
+        </Typography>
         <Button size="small" color="secondary" onClick={handleDelete}>
           Delete
         </Button>

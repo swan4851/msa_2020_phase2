@@ -46,6 +46,8 @@ function PostGrid() {
                 Content={el["content"]}
                 ID={el["id"]}
                 Date={el["datePosted"]}
+                Likes={el["likes"]}
+                Dislikes={el["dislikes"]}
               />
             </Grid>
           </Grid>
