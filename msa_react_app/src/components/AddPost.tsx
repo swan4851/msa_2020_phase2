@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
     dialogue: {
       padding: theme.spacing(3, 3),
     },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(3, 3),
+    },
   })
 );
 
@@ -54,11 +58,16 @@ export default function AddPost() {
   const handleClose = () => {
     setOpen(false);
     setNewPost("");
+    setNewPostTitle("");
   };
 
+  const [NewPostUPTitle, setNewPostTitle] = useState<string | null>("");
   const [NewPostUP, setNewPost] = useState<string | null>("");
   const handleNewPost = (s: string | null) => {
     setNewPost(s);
+  };
+  const handleNewPostTitle = (s: string | null) => {
+    setNewPostTitle(s);
   };
 
   const [HasFocus, setHasFocus] = useState<boolean>(false);
@@ -66,8 +75,16 @@ export default function AddPost() {
   const [postId, setPostId] = useState(null);
 
   const handleSubmit = () => {
-    if (NewPostUP?.length !== 0 && NewPostUP !== null && NewPostUP !== "") {
+    if (
+      NewPostUP?.length !== 0 &&
+      NewPostUP !== null &&
+      NewPostUP !== "" &&
+      NewPostUPTitle?.length !== 0 &&
+      NewPostUPTitle !== null &&
+      NewPostUPTitle !== ""
+    ) {
       console.log(NewPostUP);
+      console.log(NewPostUPTitle);
 
       var postDate = new Date();
       console.log(new Date().toLocaleString());
@@ -78,7 +95,7 @@ export default function AddPost() {
         body: JSON.stringify({
           id: 0,
           content: NewPostUP,
-          alias: "sw",
+          alias: NewPostUPTitle,
           datePosted: postDate.toISOString(),
           likes: 0,
           dislikes: 0,
@@ -102,6 +119,7 @@ export default function AddPost() {
       <Fab color="primary" aria-label="add">
         <AddIcon onClick={handleClickOpen} />
       </Fab>
+
       <Dialog
         fullScreen
         open={open}
@@ -127,17 +145,28 @@ export default function AddPost() {
           </Toolbar>
         </AppBar>
         <div className={classes.dialogue}>
-          <TextField
-            id="outlined-multiline-static"
-            label="Write your blog here!"
-            multiline
-            fullWidth
-            rows={10}
-            variant="outlined"
-            //onClick={() => setHasFocus(true)}
-            value={NewPostUP}
-            onChange={(e) => handleNewPost(e.target.value)}
-          />
+          <div className={classes.content}>
+            <TextField
+              id="outlined-basic"
+              label="Title of blog"
+              variant="outlined"
+              value={NewPostUPTitle}
+              onChange={(e) => handleNewPostTitle(e.target.value)}
+            />
+          </div>
+          <div className={classes.content}>
+            <TextField
+              id="outlined-multiline-static"
+              label="Write your blog here!"
+              multiline
+              fullWidth
+              rows={10}
+              variant="outlined"
+              //onClick={() => setHasFocus(true)}
+              value={NewPostUP}
+              onChange={(e) => handleNewPost(e.target.value)}
+            />
+          </div>
         </div>
       </Dialog>
     </div>

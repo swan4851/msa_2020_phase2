@@ -53,8 +53,6 @@ function PostGrid() {
           </Grid>
         </div>
       );
-      console.log(el["alias"]);
-      console.log(el["content"]);
     }
   });
 
@@ -63,10 +61,10 @@ function PostGrid() {
 
   return (
     <div className={classes.root}>
-      <Grid>{Cards.reverse()}</Grid>
       <div className={classes.add}>
         <AddPost></AddPost>
       </div>
+      <Grid>{Cards.reverse()}</Grid>
     </div>
   );
 

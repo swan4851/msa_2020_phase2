@@ -109,6 +109,7 @@ function PostCard(props: IMediaCardProps) {
       .then((response) => response.json())
       .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
       .catch((err) => console.log(err)); // Do something with the error
+    // window.location.reload(false);
   };
 
   const handleDislike = () => {
@@ -126,10 +127,11 @@ function PostCard(props: IMediaCardProps) {
         likes: props.Likes,
         dislikes: props.Dislikes + 1,
       }),
-    }).then(function (response) {
-      console.log(response);
-      return response.json();
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
+      .catch((err) => console.log(err)); // Do something with the error
+    // window.location.reload(false);
   };
 
   // function handleEdit() {
