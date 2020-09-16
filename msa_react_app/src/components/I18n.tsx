@@ -12,6 +12,7 @@ const resources = {
       Save: " Save ",
       Title: " Title of blog ",
       Content: " Write your blog here! ",
+      Curr: "English",
     },
   },
   es: {
@@ -22,6 +23,7 @@ const resources = {
       Save: " salvar ",
       Title: " Título del blog ",
       Content: " Escribe tu blog aquí! ",
+      Curr: "española",
     },
   },
   chi: {
@@ -32,6 +34,7 @@ const resources = {
       Save: " 保存 ",
       Title: " 博客名 ",
       Content: " 博客在这里写! ",
+      Curr: "中文",
     },
   },
   ko: {
@@ -42,6 +45,7 @@ const resources = {
       Save: " 저장 ",
       Title: " 블로그 제목",
       Content: " 여기에 블로그 작성! ",
+      Curr: "한국어",
     },
   },
 };
