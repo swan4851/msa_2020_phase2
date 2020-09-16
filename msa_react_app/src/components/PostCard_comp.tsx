@@ -16,7 +16,8 @@ import Divider from "@material-ui/core/Divider";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import IconButton from "@material-ui/core/IconButton";
-import Box from "@material-ui/core/Box";
+import { useTranslation } from "react-i18next";
+import "./I18n";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -141,14 +142,7 @@ function PostCard(props: IMediaCardProps) {
     // window.location.reload(false);
   };
 
-  // function handleEdit() {
-  //   console.log("Edit pressed");
-  //   return <AddPost></AddPost>;
-  // }
-
-  // const handleEdit = () => {
-  //   <AddPost handleAddOpen={handleClickOpen}></AddPost> // do stuff
-  // }
+  const { t, i18n } = useTranslation();
 
   return (
     <Card className={classes.root}>
@@ -182,7 +176,7 @@ function PostCard(props: IMediaCardProps) {
 
       <div className={classes.date}>
         <Typography variant="body2" color="textSecondary" component="p">
-          {"Date Posted:  " + props.Date?.split("T")[0]}
+          {t("DatePosted") + ": " + props.Date?.split("T")[0]}
         </Typography>
       </div>
 
@@ -200,7 +194,7 @@ function PostCard(props: IMediaCardProps) {
           {props.Dislikes}
         </Typography>
         <Button size="small" color="secondary" onClick={handleDelete}>
-          Delete
+          {t("Delete")}
         </Button>
       </CardActions>
       <Modal

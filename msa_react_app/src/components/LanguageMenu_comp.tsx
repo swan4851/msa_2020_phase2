@@ -3,22 +3,23 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { useTranslation } from "react-i18next";
+import "./I18n";
 
 export default function SimpleMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
   const { t, i18n } = useTranslation();
-
-  //   const translate = require("@vitalets/google-translate-api");
-
-  //   translate("Hello world", { to: "es" }).then((res: any) => {
-  //     console.log(res);
-  //   });
+  const changeLanguage = (language: string) => i18n.changeLanguage(language);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const [CurLan, setCurLan] = React.useState<string | null>("");
+
   const handleClose = (lang: any) => {
+    setCurLan(lang);
+    changeLanguage(lang);
     setAnchorEl(null);
   };
 
@@ -36,10 +37,10 @@ export default function SimpleMenu() {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClose={() => handleClose(CurLan)}
       >
         <MenuItem onClick={() => handleClose("en")}>English</MenuItem>
-        <MenuItem onClick={() => handleClose("ko")}>Korean</MenuItem>
+        <MenuItem onClick={() => handleClose("es")}>Spanish</MenuItem>
         <MenuItem onClick={() => handleClose("chi")}>Chinese</MenuItem>
       </Menu>
       <p></p>

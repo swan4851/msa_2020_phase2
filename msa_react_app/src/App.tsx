@@ -7,6 +7,7 @@ import AddPost from "./components/AddPost";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import LanguageMenu from "./components/LanguageMenu_comp";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,10 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function App() {
+  const { t, i18n } = useTranslation();
+
   const classes = useStyles();
   return (
     <div>
-      {/* <LanguageMenu></LanguageMenu> */}
+      <LanguageMenu></LanguageMenu>
       <div className={classes.add}>
         <Typography
           color="textSecondary"

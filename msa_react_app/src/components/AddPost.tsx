@@ -16,6 +16,8 @@ import { TransitionProps } from "@material-ui/core/transitions";
 import TextField from "@material-ui/core/TextField";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
+import { useTranslation } from "react-i18next";
+import "./I18n";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -61,6 +63,16 @@ export default function AddPost() {
     setNewPostTitle("");
   };
 
+  const [textLim, setTextLim] = React.useState(false);
+
+  const handleTextOpen = () => {
+    setTextLim(true);
+  };
+
+  const handleTextClose = () => {
+    setTextLim(false);
+  };
+
   const [NewPostUPTitle, setNewPostTitle] = useState<string | null>("");
   const [NewPostUP, setNewPost] = useState<string | null>("");
   const handleNewPost = (s: string | null) => {
@@ -75,6 +87,7 @@ export default function AddPost() {
   const [postId, setPostId] = useState(null);
 
   const handleSubmit = () => {
+    console.log(NewPostUP?.length);
     if (
       NewPostUP?.length !== 0 &&
       NewPostUP !== null &&
@@ -87,7 +100,7 @@ export default function AddPost() {
       console.log(NewPostUPTitle);
 
       var postDate = new Date();
-      console.log(new Date().toLocaleString());
+      // console.log(new Date().toLocaleString());
       fetch("https://dankblog.azurewebsites.net/api/Posts", {
         method: "POST",
         // We convert the React state to JSON and send it as the POST body
@@ -114,6 +127,8 @@ export default function AddPost() {
     }
   };
 
+  const { t, i18n } = useTranslation();
+
   return (
     <div>
       <Fab color="primary" aria-label="add" onClick={handleClickOpen}>
@@ -137,10 +152,10 @@ export default function AddPost() {
               <CloseIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Add new post
+              {t("AddPost")}
             </Typography>
             <Button autoFocus color="inherit" onClick={handleSubmit}>
-              save
+              {t("Save")}
             </Button>
           </Toolbar>
         </AppBar>
@@ -148,7 +163,7 @@ export default function AddPost() {
           <div className={classes.content}>
             <TextField
               id="outlined-basic"
-              label="Title of blog"
+              label={t("Title")}
               variant="outlined"
               value={NewPostUPTitle}
               onChange={(e) => handleNewPostTitle(e.target.value)}
@@ -157,7 +172,7 @@ export default function AddPost() {
           <div className={classes.content}>
             <TextField
               id="outlined-multiline-static"
-              label="Write your blog here!"
+              label={t("Content")}
               multiline
               fullWidth
               rows={10}
