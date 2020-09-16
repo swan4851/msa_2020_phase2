@@ -34,6 +34,16 @@ const resources = {
       Content: " 博客在这里写! ",
     },
   },
+  ko: {
+    translation: {
+      Delete: "지우다 ",
+      DatePosted: " 게시 된 날짜 ",
+      AddPost: " 새 블로그 추가 ",
+      Save: " 저장 ",
+      Title: " 블로그 제목",
+      Content: " 여기에 블로그 작성! ",
+    },
+  },
 };
 
 I18n.use(initReactI18next) // passes i18n down to react-i18next

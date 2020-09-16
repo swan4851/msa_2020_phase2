@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import LanguageMenu from "./components/LanguageMenu_comp";
 import { useTranslation } from "react-i18next";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,6 +34,7 @@ function App() {
         >
           WangBlogs
         </Typography>
+        <Divider variant="middle" />
       </div>
       <PostGrid />
     </div>
