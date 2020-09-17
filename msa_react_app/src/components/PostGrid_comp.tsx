@@ -3,6 +3,7 @@ import PostCard from "../components/PostCard_comp";
 import { Grid } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { IUserInput } from "../common/Interface";
+import LoginNav from "../components/LoginNav_comp";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function PostGrid(props: IUserInput) {
+function PostGrid(props: any) {
   const [ItemArray, setItemArray] = useState<any[]>([]);
   const classes = useStyles();
 

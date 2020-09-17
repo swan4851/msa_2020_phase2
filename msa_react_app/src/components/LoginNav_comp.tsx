@@ -1,17 +1,17 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
+import { GoogleLogout } from "react-google-login";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import Typography from "@material-ui/core/Typography";
+import { IUserInput } from "../common/Interface";
+import PostCard from "./PostCard_comp";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -48,10 +48,15 @@ export default function LoginNav() {
     setAnchorEl(event.currentTarget);
   };
 
+  const [Name, setName] = React.useState<string | null>("");
+
   const responseGoogle = (response: any) => {
-    console.log(response);
     setAuth(true);
-    console.log("bruh");
+    if (response.profileObj.name === "Shiyao Wang") {
+      setName("Welcome great overlord, ruler of all time and space");
+    } else {
+      setName("Welome " + response.profileObj.name + " !");
+    }
   };
 
   return (
@@ -65,18 +70,6 @@ export default function LoginNav() {
             onFailure={responseGoogle}
             cookiePolicy={"single_host_origin"}
           />
-          <FormGroup className={classes.switch}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={auth}
-                  onChange={handleChange}
-                  aria-label="login switch"
-                />
-              }
-              label={auth ? "Logout" : "Login"}
-            />
-          </FormGroup>
           {auth && (
             <div>
               <IconButton
@@ -86,6 +79,9 @@ export default function LoginNav() {
                 color="inherit"
               >
                 <AccountCircle />
+                <Typography variant="h6" color="inherit">
+                  {Name}
+                </Typography>
               </IconButton>
             </div>
           )}

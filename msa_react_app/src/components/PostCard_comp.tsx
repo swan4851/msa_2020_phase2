@@ -15,6 +15,7 @@ import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import IconButton from "@material-ui/core/IconButton";
 import { useTranslation } from "react-i18next";
 import "./I18n";
+// import LoginNav from "./LoginNav_comp"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
