@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,6 +14,8 @@ import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import { useTranslation } from "react-i18next";
 import "./I18n";
+
+import { IUserInput } from "../common/Interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,6 +36,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+interface ISearchBarProps {
+  SetUserInput: (a: IUserInput) => void;
+}
+
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement },
   ref: React.Ref<unknown>
@@ -45,11 +47,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-// interface AddNewPost {
-//   NewPost: string | null;
-// }
-
-export default function AddPost() {
+export default function AddPost(props: ISearchBarProps) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -63,16 +61,6 @@ export default function AddPost() {
     setNewPostTitle("");
   };
 
-  const [textLim, setTextLim] = React.useState(false);
-
-  const handleTextOpen = () => {
-    setTextLim(true);
-  };
-
-  const handleTextClose = () => {
-    setTextLim(false);
-  };
-
   const [NewPostUPTitle, setNewPostTitle] = useState<string | null>("");
   const [NewPostUP, setNewPost] = useState<string | null>("");
   const handleNewPost = (s: string | null) => {
@@ -82,12 +70,14 @@ export default function AddPost() {
     setNewPostTitle(s);
   };
 
-  const [HasFocus, setHasFocus] = useState<boolean>(false);
-
-  const [postId, setPostId] = useState(null);
+  const [AddPost, SetAddPost] = React.useState(0);
 
   const handleSubmit = () => {
     console.log(NewPostUP?.length);
+    console.log("sent");
+
+    SetAddPost(AddPost + 1);
+
     if (
       NewPostUP?.length !== 0 &&
       NewPostUP !== null &&
@@ -118,12 +108,13 @@ export default function AddPost() {
         return response.json();
       });
 
-      handleClose();
-      // window.location.reload(false);
+      let UserInput: IUserInput = {
+        SearchQuery: NewPostUPTitle,
+      };
+      console.log(UserInput);
+      props.SetUserInput(UserInput);
 
-      // props.NewPost = NewPostUP;
-    } else {
-      setHasFocus(true);
+      handleClose();
     }
   };
 
@@ -177,7 +168,6 @@ export default function AddPost() {
               fullWidth
               rows={10}
               variant="outlined"
-              //onClick={() => setHasFocus(true)}
               value={NewPostUP}
               onChange={(e) => handleNewPost(e.target.value)}
             />

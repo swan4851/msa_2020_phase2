@@ -4,14 +4,11 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import AddPost from "../components/AddPost";
 import Divider from "@material-ui/core/Divider";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -94,13 +91,11 @@ function PostCard(props: IMediaCardProps) {
       console.log(response);
       return response.json();
     });
-
-    // window.location.reload(false);
   };
 
-  const handlelike = () => {
-    console.log(props.Likes + 1);
+  const [count, setCount] = React.useState(props.Likes);
 
+  const handlelike = () => {
     fetch("https://dankblog.azurewebsites.net/api/Posts/" + props.ID, {
       method: "PUT",
       // We convert the React state to JSON and send it as the POST body
@@ -117,7 +112,8 @@ function PostCard(props: IMediaCardProps) {
       .then((response) => response.json())
       .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
       .catch((err) => console.log(err)); // Do something with the error
-    // window.location.reload(false);
+
+    setCount(count + 1);
   };
 
   const handleDislike = () => {
@@ -139,7 +135,6 @@ function PostCard(props: IMediaCardProps) {
       .then((response) => response.json())
       .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
       .catch((err) => console.log(err)); // Do something with the error
-    // window.location.reload(false);
   };
 
   const { t, i18n } = useTranslation();
@@ -148,11 +143,6 @@ function PostCard(props: IMediaCardProps) {
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardActionArea onClick={handleOpen}>
-          {/* <CardMedia
-            className={classes.media}
-            //   image="/static/images/cards/contemplative-reptile.jpg"
-            //   title="Contemplative Reptile"
-          /> */}
           <div className={classes.divider}>
             <CardContent className={classes.media}>
               <Typography gutterBottom variant="h5" component="h2">
@@ -185,7 +175,7 @@ function PostCard(props: IMediaCardProps) {
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.Likes}
+          {count}
         </Typography>
         <IconButton aria-label="dislikes" onClick={handleDislike}>
           <ThumbDownIcon />
@@ -221,34 +211,3 @@ function PostCard(props: IMediaCardProps) {
 }
 
 export default PostCard;
-
-// function Component1(){
-
-//   const [count, setCount] = React.useState(0);
-
-//   const handleClose = () => {
-//     setCount(count + 1);
-//   };
-
-//   return (count);
-
-// }
-// export default Component1;
-
-// //======================================
-
-// import Component1
-// function Component2(){
-
-//   const handleClick = () => {
-//     <Component1 ></Component1>
-//   };
-
-//   return(
-//     <Button onClick={handleClick}>
-//       save
-//     </Button>
-//   );
-
-// }
-// export default Component2;

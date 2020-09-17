@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PostCard from "../components/PostCard_comp";
-import AddPost from "../components/AddPost";
 import { Grid } from "@material-ui/core";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { IUserInput } from "../common/Interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function PostGrid() {
+function PostGrid(props: IUserInput) {
   const [ItemArray, setItemArray] = useState<any[]>([]);
   const classes = useStyles();
 
@@ -27,13 +27,13 @@ function PostGrid() {
       .then((response) => {
         console.log(response);
         setItemArray(response);
+        console.log("why not work then?");
       })
       .catch(() => console.log("it didn't work"));
-  }, []);
+  }, [props.SearchQuery]);
 
   var Cards: JSX.Element[] = [];
   ItemArray.forEach((el: any, i: Number) => {
-    //console.log(el);
     if (el === undefined) {
       return;
     } else {
@@ -56,21 +56,11 @@ function PostGrid() {
     }
   });
 
-  // const [NewPostUP, setNewPost] = useState<string | null>("Default value");
-  const Post = "Default value";
-
   return (
     <div className={classes.root}>
-      <div className={classes.add}>
-        <AddPost></AddPost>
-      </div>
       <Grid>{Cards.reverse()}</Grid>
     </div>
   );
-
-  // function refresh() => {
-  //   // nblablblaba
-  // }
 }
 
 export default PostGrid;

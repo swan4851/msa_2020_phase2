@@ -30,7 +30,7 @@ export default function SimpleMenu() {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        Change Language: {t("Curr")}
+        Language: {t("Curr")}
       </Button>
       <Menu
         id="simple-menu"

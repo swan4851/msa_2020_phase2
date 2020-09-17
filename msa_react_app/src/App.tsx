@@ -1,27 +1,32 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import PostCard from "./components/PostCard_comp";
 import PostGrid from "./components/PostGrid_comp";
 import AddPost from "./components/AddPost";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import LanguageMenu from "./components/LanguageMenu_comp";
-import { useTranslation } from "react-i18next";
 import Divider from "@material-ui/core/Divider";
+import { IUserInput } from "./common/Interface";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     add: {
       textAlign: "center",
+      paddingTop: theme.spacing(3),
     },
   })
 );
 
 function App() {
-  const { t, i18n } = useTranslation();
-
   const classes = useStyles();
+
+  const [UserInput, setUserInput] = React.useState<IUserInput>({
+    SearchQuery: "adventure",
+  });
+  function SetUserInput(a: IUserInput) {
+    setUserInput(a);
+  }
+
   return (
     <div>
       <LanguageMenu></LanguageMenu>
@@ -34,9 +39,13 @@ function App() {
         >
           WangBlogs
         </Typography>
-        <Divider variant="middle" />
       </div>
-      <PostGrid />
+      <Divider variant="middle" />
+      <div className={classes.add}>
+        <AddPost SetUserInput={(a: IUserInput) => SetUserInput(a)} />
+      </div>
+
+      <PostGrid SearchQuery={UserInput.SearchQuery} />
     </div>
   );
 }
