@@ -93,7 +93,8 @@ function PostCard(props: IMediaCardProps) {
     });
   };
 
-  const [count, setCount] = React.useState(props.Likes);
+  const [Likecount, setLikeCount] = React.useState(props.Likes);
+  const [Dislikecount, setDislikeCount] = React.useState(props.Dislikes);
 
   const handlelike = () => {
     fetch("https://dankblog.azurewebsites.net/api/Posts/" + props.ID, {
@@ -113,7 +114,7 @@ function PostCard(props: IMediaCardProps) {
       .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
       .catch((err) => console.log(err)); // Do something with the error
 
-    setCount(count + 1);
+    setLikeCount(Likecount + 1);
   };
 
   const handleDislike = () => {
@@ -135,6 +136,8 @@ function PostCard(props: IMediaCardProps) {
       .then((response) => response.json())
       .then((data) => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
       .catch((err) => console.log(err)); // Do something with the error
+
+    setDislikeCount(Dislikecount + 1);
   };
 
   const { t, i18n } = useTranslation();
@@ -175,13 +178,13 @@ function PostCard(props: IMediaCardProps) {
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant="body2" color="textSecondary" component="p">
-          {count}
+          {Likecount}
         </Typography>
         <IconButton aria-label="dislikes" onClick={handleDislike}>
           <ThumbDownIcon />
         </IconButton>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.Dislikes}
+          {Dislikecount}
         </Typography>
         <Button size="small" color="secondary" onClick={handleDelete}>
           {t("Delete")}
