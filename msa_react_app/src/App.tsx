@@ -7,6 +7,7 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import LanguageMenu from "./components/LanguageMenu_comp";
 import Divider from "@material-ui/core/Divider";
 import { IUserInput } from "./common/Interface";
+import LoginNav from "./components/LoginNav_comp";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,9 +27,9 @@ function App() {
   function SetUserInput(a: IUserInput) {
     setUserInput(a);
   }
-
   return (
     <div>
+      <LoginNav></LoginNav>
       <LanguageMenu></LanguageMenu>
       <div className={classes.add}>
         <Typography
@@ -44,7 +45,6 @@ function App() {
       <div className={classes.add}>
         <AddPost SetUserInput={(a: IUserInput) => SetUserInput(a)} />
       </div>
-
       <PostGrid SearchQuery={UserInput.SearchQuery} />
     </div>
   );
