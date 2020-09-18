@@ -13,6 +13,7 @@ const resources = {
       Title: " Title of blog ",
       Content: " Write your blog here! ",
       Curr: "English",
+      Add: "Add!",
     },
   },
   es: {
@@ -24,6 +25,7 @@ const resources = {
       Title: " Título del blog ",
       Content: " Escribe tu blog aquí! ",
       Curr: "española",
+      Add: "añadir!",
     },
   },
   chi: {
@@ -35,6 +37,7 @@ const resources = {
       Title: " 博客名 ",
       Content: " 博客在这里写! ",
       Curr: "中文",
+      Add: "加!",
     },
   },
   ko: {
@@ -46,6 +49,7 @@ const resources = {
       Title: " 블로그 제목",
       Content: " 여기에 블로그 작성! ",
       Curr: "한국어",
+      Add: "더하다!",
     },
   },
 };

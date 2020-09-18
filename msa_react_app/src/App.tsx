@@ -8,12 +8,33 @@ import LanguageMenu from "./components/LanguageMenu_comp";
 import Divider from "@material-ui/core/Divider";
 import { IUserInput } from "./common/Interface";
 import LoginNav from "./components/LoginNav_comp";
+import SocialShare from "./components/SocialShare";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     add: {
       textAlign: "center",
       paddingTop: theme.spacing(3),
+    },
+    share: {
+      "& > *": {
+        margin: theme.spacing(2),
+      },
+      textAlign: "center",
+      paddingTop: theme.spacing(6),
+      paddingBottom: theme.spacing(6),
+    },
+    sharButtons: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+    fab: {
+      margin: theme.spacing(2),
+    },
+    absolute: {
+      position: "absolute",
+      bottom: theme.spacing(2),
+      right: theme.spacing(3),
     },
   })
 );
@@ -46,6 +67,11 @@ function App() {
         <AddPost SetUserInput={(a: IUserInput) => SetUserInput(a)} />
       </div>
       <PostGrid SearchQuery={UserInput.SearchQuery} />
+
+      <Divider />
+      <div className={classes.share}>
+        <SocialShare />
+      </div>
     </div>
   );
 }

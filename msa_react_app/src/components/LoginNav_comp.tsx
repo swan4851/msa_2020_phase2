@@ -12,6 +12,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Typography from "@material-ui/core/Typography";
 import { IUserInput } from "../common/Interface";
 import PostCard from "./PostCard_comp";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,13 +50,15 @@ export default function LoginNav() {
   };
 
   const [Name, setName] = React.useState<string | null>("");
+  const [PP, setPP] = React.useState<string | null>("");
 
   const responseGoogle = (response: any) => {
     setAuth(true);
     if (response.profileObj.name === "Shiyao Wang") {
-      setName("Welcome great overlord, ruler of all time and space");
+      setName("Welcome back great overlord, ruler of all time and space");
     } else {
       setName("Welome " + response.profileObj.name + " !");
+      setPP(response.profileObj.imgUrl);
     }
   };
 
@@ -79,6 +82,7 @@ export default function LoginNav() {
                 color="inherit"
               >
                 <AccountCircle />
+                {/* <Avatar alt="Remy Sharp" src={PP} /> */}
                 <Typography variant="h6" color="inherit">
                   {Name}
                 </Typography>
