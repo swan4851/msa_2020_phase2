@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme: Theme) =>
     fab: {
       margin: theme.spacing(2),
     },
+    page: {
+      backgroundColor: "#B2DCF5",
+    },
     absolute: {
       position: "absolute",
       bottom: theme.spacing(2),
@@ -48,8 +51,9 @@ function App() {
   function SetUserInput(a: IUserInput) {
     setUserInput(a);
   }
+  const isBackgroundRed = true;
   return (
-    <div>
+    <div className={classes.page}>
       <LoginNav></LoginNav>
       <LanguageMenu></LanguageMenu>
       <div className={classes.add}>

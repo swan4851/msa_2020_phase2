@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       flexGrow: 1,
       border: "1px solid #000",
+      backgroundColor: "#E7F1F7",
     },
     media: {
       height: 140,
